@@ -28,12 +28,12 @@ $(function () {
      * Comment the lines out to remove the grid
      */
 
-    // for (let i = 100; i < canvas.width; i += 100) {
-    //   createPlatform(i, canvas.height, -1, -canvas.height);
-    // }
-    // for (let i = 100; i < canvas.height; i += 100) {
-    //   createPlatform(canvas.width, i, -canvas.width, -1);
-    // }
+     for (let i = 100; i < canvas.width; i += 100) {
+       createPlatform(i, canvas.height, -1, -canvas.height);
+     }
+     for (let i = 100; i < canvas.height; i += 100) {
+       createPlatform(canvas.width, i, -canvas.width, -1);
+    }
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE BELOW THIS POINT///////////
@@ -43,18 +43,24 @@ $(function () {
     // Create platforms
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
+      createPlatform(10, 600, 1450, 200)//floor
+      createPlatform(650, 475, 300, 25)//first step
+      createPlatform(300, 375, 300, 25)//second step
+      createPlatform(1200, 200, 30, 400)//wall
+      createPlatform(700, 275, 100, 25)//Mini#1
+      createPlatform(1000, 200, 100, 25)//Mini#2
+      createPlatform(120, 275, 100, 25)//Mini#3
 
 
-
-    
     // TODO 2
     // Create collectables
     // You must decide on the collectable type, the x position, the y position, the gravity, and the bounce strength
     // Your collectable choices are 'database' 'diamond' 'grace' 'kennedi' 'max' and 'steve'; more can be added if you wish
     // example usage: createCollectable(type, x, y, gravity, bounce)
-
-
-
+      createCollectable("max", 1150, 520, 10, 0)//groundSteve
+      createCollectable("steve", 125, 240, 10, 0)//miniGroundSteve
+      createCollectable("kennedi", 1250, 520, 10, 0)//caveSteve
+      
 
     // TODO 3
     // Create cannons
@@ -62,8 +68,9 @@ $(function () {
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
 
-
-
+      createCannon("left", 200, 2000)
+      createCannon("top", 900, 3000)
+      createCannon("top", 1400, 4000)
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
