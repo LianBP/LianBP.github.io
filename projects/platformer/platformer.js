@@ -43,13 +43,18 @@ $(function () {
     // Create platforms
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
-      createPlatform(10, 600, 1450, 200)//floor
-      createPlatform(650, 475, 300, 25)//first step
-      createPlatform(300, 375, 300, 25)//second step
-      createPlatform(1200, 200, 30, 400)//wall
-      createPlatform(700, 275, 100, 25)//Mini#1
-      createPlatform(1000, 200, 100, 25)//Mini#2
-      createPlatform(120, 275, 100, 25)//Mini#3
+
+      createPlatform(10, 700, 1450, 50);//floor
+      createPlatform(650, 475, 300, 25);//initial step
+      createPlatform(300, 375, 300, 25);//initial step2
+      createPlatform(1200, 200, 30, 500);//wall
+      createPlatform(1225, 575, 100, 25);//Final step
+      createPlatform(1300, 455, 100, 25);//Final step2
+      createPlatform(1225, 335, 100, 25);
+      createPlatform(700, 275, 100, 25);//Mini#1
+      createPlatform(1025, 200, 50, 25);//Mini#2
+      createPlatform(120, 275, 100, 25);//Mini#3
+      createPlatform(1100, 600, 100, 25);//Mini#4
 
 
     // TODO 2
@@ -68,9 +73,9 @@ $(function () {
     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
     // example usage: createCannon(side, position, delay, width, height)
 
-      createCannon("left", 200, 2000)
-      createCannon("top", 900, 3000)
-      createCannon("top", 1400, 4000)
+      createCannon("left", 200, 2000) //Challenge for the second point
+      createCannon("top", 900, 3000) //First dodgeable
+      createCannon("top", 1400, 4000) //Reset
 
     /////////////////////////////////////////////////
     //////////ONLY CHANGE ABOVE THIS POINT///////////
