@@ -27,14 +27,14 @@ $(function () {
      * This can give you a better idea of where to create new platforms
      * Comment the lines out to remove the grid
      */
-
+    /*
      for (let i = 100; i < canvas.width; i += 100) {
        createPlatform(i, canvas.height, -1, -canvas.height);
      }
      for (let i = 100; i < canvas.height; i += 100) {
        createPlatform(canvas.width, i, -canvas.width, -1);
     }
-
+    */
     /////////////////////////////////////////////////
     //////////ONLY CHANGE BELOW THIS POINT///////////
     /////////////////////////////////////////////////
@@ -44,17 +44,17 @@ $(function () {
     // You must decide the x position, y position, width, and height of the platforms
     // example usage: createPlatform(x,y,width,height)
 
-      createPlatform(10, 700, 1450, 50);//floor
-      createPlatform(650, 475, 300, 25);//initial step
-      createPlatform(300, 375, 300, 25);//initial step2
-      createPlatform(1200, 200, 30, 500);//wall
-      createPlatform(1225, 575, 100, 25);//Final step
+      
+      createPlatform(650, 495, 300, 25);//initial step
+      createPlatform(300, 395, 300, 25);//initial step2
+      createPlatform(1200, 250, 30, 550);//wall
+      createPlatform(1225, 575, 100, 25);//Final step3
       createPlatform(1300, 455, 100, 25);//Final step2
-      createPlatform(1225, 335, 100, 25);
+      createPlatform(1225, 335, 100, 25);//Final step
       createPlatform(700, 275, 100, 25);//Mini#1
       createPlatform(1025, 200, 50, 25);//Mini#2
       createPlatform(120, 275, 100, 25);//Mini#3
-      createPlatform(1100, 600, 100, 25);//Mini#4
+      createPlatform(1120, 590, 80, 25);//Mini#44
 
 
     // TODO 2

@@ -432,6 +432,7 @@ function drawProjectiles() {
     );
     projectiles[i].x = projectiles[i].x + projectiles[i].speedX;
     projectiles[i].y = projectiles[i].y + projectiles[i].speedY;
+
   }
 }
 
