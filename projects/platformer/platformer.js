@@ -54,7 +54,7 @@ $(function () {
       createPlatform(700, 275, 100, 25);//Mini#1
       createPlatform(1025, 200, 50, 25);//Mini#2
       createPlatform(120, 275, 100, 25);//Mini#3
-      createPlatform(1120, 590, 80, 25);//Mini#44
+      createPlatform(1120, 599, 80, 25);//Mini#44
 
 
     // TODO 2
