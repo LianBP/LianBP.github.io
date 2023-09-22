@@ -6,12 +6,17 @@
 	<script src="jquery.min.js"></script>
 	<style>
 		.box {
-			width: 70px;
-			height: 70px;
-			background-color: teal;
+			width: 100px;
+			height: 120px;
+			background-color: white;
+			background-image: url(https://mail.google.com/mail/u/0?ui=2&ik=8583b8fc60&attid=0.1&permmsgid=msg-f:1777764504176698594&th=18abe365c5c024e2&view=att&disp=safe&realattid=f_lmuycpnf0);
+			background-size: 100px;
+			background-repeat: no-repeat;
+			background-position: bottom;
 			font-size: 300%;
+			
 			text-align: center;
-			user-select: none;
+			user-select: auto;
 			display: block;
 			position: absolute;
 			top: 100px;
@@ -46,12 +51,12 @@
 			var boardHeight = jQuery(window).height(); //the maximum Y-Coordinate of the screen
 
 			// Every 50 milliseconds, call the update Function (see below)
-			setInterval(update, 50);
+			var interval = setInterval(update, 50);
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
 
-			// moves the Box to a new position on the screen along the X-Axis
+			// moves the Box to a new position on the screen along the X-Axis and Y-Axis
 			function moveBoxTo(newPositionX,newPositionY) {
 				box.css("left", newPositionX);
 				box.css("top", newPositionY);
@@ -71,29 +76,33 @@
 			var positionX = 0;
 			var positionY = 0;
 			var points = 0;
-			var speed = 10;
+			var speedX = 10;
 			var speedY = 10;
-
-		
+			// Fix
+			var randNumX = Math.random() * boardWidth;
+			var randNumY = Math.random() * boardHeight;
+			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
 			it should move the Box to a new location. If the box drifts off the screen
 			turn it around! 
 			*/
 			function update() {
+				
 				/* Your Code to Increase positionX by 10 HERE */
-				positionX = positionX + speed;
+				positionX = positionX + speedX;
 				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
-				//Colition on X
-				if (positionX > boardWidth || positionX < 0) {
-					speed = speed * -1
-				} 
 				
-				if (positionY > boardHeight || positionY < 0){
-					speedY = speedY = -1
+				//Colition on X
+				if (positionX > (boardWidth - 90) || positionX < 0) {
+					speedX = speedX * -1;
+				} 
+				//Colition on Y
+				if (positionY > (boardHeight + 58) || positionY < 0) {
+					speedY = speedY * -1;
 				}
-
+				
 			};
 
 			/* 
@@ -102,19 +111,41 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-				positionX = 0;
+
+				positionX = randNumX;
+				positionY = randNumY;
+				
 				//This will change the score shown
 				points = points + 1;
-				//This will change the speed by 3
-				if (speed >= 0){
-					speed = speed + 3;
-
-				}else if(speed < 0){
-					speed = speed - 3;
+				if (points % 3 === 0) {
+					//This will change the speed on X by adding 3
+					if (speedX > 0){
+						speedX = speedX + 4;
+					}
+					if(speedX < 0){
+						speedX = speedX - 4;
+					}
+					//This will change the speed of Y by adding 3
+					if (speedY >= 0) {
+						speedY = speedY + 4;
+					} else if (speedY < 0) {
+						speedY = speedY - 4;
+					}
 				}
+
+				
+				var red = Math.random() * 255
+				var green = Math.random() * 255
+				var blue = Math.random() * 255
+				var color = "rgb(" + red + "," + green + "," + blue + ")"
+				box.css('background-color', color);
+			
 				changeBoxText(points);
 
 			};
+			function endGame() {
+				clearInterval(interval);
+			}
 		})();
 	</script>
 </body>
