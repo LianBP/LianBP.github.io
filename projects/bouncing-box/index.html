@@ -14,7 +14,7 @@
 			background-repeat: no-repeat;
 			background-position: bottom;
 			font-size: 300%;
-			
+			border-radius: 50px;
 			text-align: center;
 			user-select: auto;
 			display: block;
@@ -55,6 +55,9 @@
 			
 			// Every time the box is clicked, call the handleBoxClick Function (see below)
 			box.on('click', handleBoxClick);
+			
+			// Every time the board is clicked, call the handleBoardClick Function (see below)
+			board.on('click', handleBoardClick);
 
 			// moves the Box to a new position on the screen along the X-Axis and Y-Axis
 			function moveBoxTo(newPositionX,newPositionY) {
@@ -72,15 +75,14 @@
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			 
+			var click = 0
 			var positionX = 0;
 			var positionY = 0;
 			var points = 0;
 			var speedX = 10;
 			var speedY = 10;
-			// Fix
-			var randNumX = Math.random() * boardWidth;
-			var randNumY = Math.random() * boardHeight;
+			var randNumX;
+			var randNumY; 
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -88,6 +90,9 @@
 			turn it around! 
 			*/
 			function update() {
+				//randomize these numbers each frame.
+				randNumX = Math.random() * (boardWidth - 90);
+				randNumY = Math.random() * (boardHeight + 58);
 				
 				/* Your Code to Increase positionX by 10 HERE */
 				positionX = positionX + speedX;
@@ -111,12 +116,13 @@
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-
-				positionX = randNumX;
-				positionY = randNumY;
-				
+					
+					positionX = randNumX;
+					positionY = randNumY;
+					
 				//This will change the score shown
 				points = points + 1;
+				click = click - 1
 				if (points % 3 === 0) {
 					//This will change the speed on X by adding 3
 					if (speedX > 0){
@@ -133,20 +139,38 @@
 					}
 				}
 
-				
-				var red = Math.random() * 255
-				var green = Math.random() * 255
-				var blue = Math.random() * 255
+				//Box colors
+				var red = Math.random() * 255;
+				var green = Math.random() * 255;
+				var blue = Math.random() * 255;
 				var color = "rgb(" + red + "," + green + "," + blue + ")"
 				box.css('background-color', color);
 			
 				changeBoxText(points);
 
 			};
+			function handleBoardClick() {
+				click = click + 1
+				if(click === 10){
+					endGame();
+				}
+			};
+
 			function endGame() {
 				clearInterval(interval);
-			}
-		})();
+				if (endGame) {
+					changeBoxText("reset");
+					clearTimeout(handleBoxClick);
+					location.reload();
+				}
+			
+			
+			
+			};
+
+
+		}
+		)();
 	</script>
 </body>
 </html>
