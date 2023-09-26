@@ -75,7 +75,7 @@
 			//////////////////////////////////////////////////////////////////
 			
 			// TODO 2 - Variable declarations 
-			var click = 0
+			var click = 0;
 			var positionX = 0;
 			var positionY = 0;
 			var points = 0;
@@ -122,7 +122,8 @@
 					
 				//This will change the score shown
 				points = points + 1;
-				click = click - 1
+				click = click - 1;
+				
 				if (points % 3 === 0) {
 					//This will change the speed on X by adding 3
 					if (speedX > 0){
@@ -143,14 +144,15 @@
 				var red = Math.random() * 255;
 				var green = Math.random() * 255;
 				var blue = Math.random() * 255;
-				var color = "rgb(" + red + "," + green + "," + blue + ")"
+				var color = "rgb(" + red + "," + green + "," + blue + ")";
 				box.css('background-color', color);
-			
+				
 				changeBoxText(points);
 
 			};
+
 			function handleBoardClick() {
-				click = click + 1
+				click = click + 1;
 				if(click === 10){
 					endGame();
 				}
@@ -163,12 +165,7 @@
 					clearTimeout(handleBoxClick);
 					location.reload();
 				}
-			
-			
-			
 			};
-
-
 		}
 		)();
 	</script>
