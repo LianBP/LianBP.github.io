@@ -9,23 +9,24 @@
 			width: 100px;
 			height: 120px;
 			background-color: white;
-			background-image: url(https://mail.google.com/mail/u/0?ui=2&ik=8583b8fc60&attid=0.1&permmsgid=msg-f:1777764504176698594&th=18abe365c5c024e2&view=att&disp=safe&realattid=f_lmuycpnf0);
+			background-image: url(img/UFO.png);
 			background-size: 100px;
 			background-repeat: no-repeat;
 			background-position: bottom;
 			font-size: 300%;
 			border-radius: 50px;
 			text-align: center;
-			user-select: auto;
+			user-select: none;
 			display: block;
 			position: absolute;
 			top: 100px;
 			left: 100px;  /* <--- Change me! */
+			
 		}
 		.board{
 			height: 100vh;
 			background-image: url(https://i.ytimg.com/vi/4gmrHQa7fEg/maxresdefault.jpg);
-			background-size: 1525px ;
+			background-size: 1525px;
 			background-repeat: no-repeat;
 		}
 	</style>
@@ -83,6 +84,10 @@
 			var speedY = 10;
 			var randNumX;
 			var randNumY; 
+            var red; 
+			var green;
+			var blue; 
+            var color;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -93,6 +98,9 @@
 				//randomize these numbers each frame.
 				randNumX = Math.random() * (boardWidth - 90);
 				randNumY = Math.random() * (boardHeight + 58);
+				red = Math.random() * 255;
+                green = Math.random() * 255;
+                blue = Math.random() * 255;
 				
 				/* Your Code to Increase positionX by 10 HERE */
 				positionX = positionX + speedX;
@@ -109,7 +117,17 @@
 				}
 				
 			};
-
+			
+			function ranColors() {
+                    color = "rgb(" + red + "," + green + "," + blue + ")";
+                    box.css('background-color', color);
+            }
+            
+            function endColor(){
+                    color = "rgb(255,0,0)";
+                    box.css('background-color', color);
+            }
+				
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
@@ -139,14 +157,12 @@
 						speedY = speedY - 4;
 					}
 				}
-
-				//Box colors
-				var red = Math.random() * 255;
-				var green = Math.random() * 255;
-				var blue = Math.random() * 255;
-				var color = "rgb(" + red + "," + green + "," + blue + ")";
-				box.css('background-color', color);
-				
+				if (click === 9) {
+                    endColor();
+                } else {
+                    ranColors();
+                }
+	
 				changeBoxText(points);
 
 			};
