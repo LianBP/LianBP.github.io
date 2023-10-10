@@ -29,16 +29,13 @@
 			background-size: 1525px;
 			background-repeat: repeat;
 		}
-		.text{
-			transform: none;
-		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 </head>
 <body class="board">
 	<!-- HTML for the box -->
-	<div><div class="box"><div class="text">?</div></div>
+	<div class="box">?</div>
 
 	<script>
 		(function(){
@@ -123,7 +120,6 @@
 				if (fun === true) {
 					if (speedX < 0){
 					box.css('transform', 'scalex(-1)')
-					
 					} else {
 						box.css('transform', 'none')
 					}
