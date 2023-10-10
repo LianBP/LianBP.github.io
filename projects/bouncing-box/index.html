@@ -14,20 +14,23 @@
 			background-repeat: no-repeat;
 			background-position: bottom;
 			font-size: 300%;
-			border-radius: 50px;
+			border-radius: 20px;
 			text-align: center;
 			user-select: none;
 			display: block;
 			position: absolute;
 			top: 100px;
 			left: 100px;  /* <--- Change me! */
-			
+			transform: none;	
 		}
 		.board{
 			height: 100vh;
-			background-image: url(https://i.ytimg.com/vi/4gmrHQa7fEg/maxresdefault.jpg);
+			background-image: url(img/Space.jpg);
 			background-size: 1525px;
-			background-repeat: no-repeat;
+			background-repeat: repeat;
+		}
+		.text{
+			transform: none;
 		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
@@ -35,7 +38,7 @@
 </head>
 <body class="board">
 	<!-- HTML for the box -->
-	<div class="box">?</div>
+	<div><div class="box"><div class="text">?</div></div>
 
 	<script>
 		(function(){
@@ -88,6 +91,7 @@
 			var green;
 			var blue; 
             var color;
+			var fun = false;
 			
 			/* 
 			This Function will be called 20 times/second. Each time it is called,
@@ -115,16 +119,19 @@
 				if (positionY > (boardHeight + 58) || positionY < 0) {
 					speedY = speedY * -1;
 				}
-				
+
+				if (fun === true) {
+					if (speedX < 0){
+					box.css('transform', 'scalex(-1)')
+					
+					} else {
+						box.css('transform', 'none')
+					}
+				}
 			};
 			
 			function ranColors() {
                     color = "rgb(" + red + "," + green + "," + blue + ")";
-                    box.css('background-color', color);
-            }
-            
-            function endColor(){
-                    color = "rgb(255,0,0)";
                     box.css('background-color', color);
             }
 				
@@ -150,6 +157,7 @@
 					if(speedX < 0){
 						speedX = speedX - 4;
 					}
+
 					//This will change the speed of Y by adding 3
 					if (speedY >= 0) {
 						speedY = speedY + 4;
@@ -157,18 +165,21 @@
 						speedY = speedY - 4;
 					}
 				}
-				if (click === 9) {
-                    endColor();
-                } else {
-                    ranColors();
+				if (click <= 8) {
+                   ranColors();
                 }
-	
+				
 				changeBoxText(points);
-
 			};
 
 			function handleBoardClick() {
 				click = click + 1;
+				if (click >= 9) {
+                    setInterval(ranColors, 100);
+					box.css('background-image', 'url(img/Nyan.gif)');
+					board.css('background-image', 'url(img/Nyan-background.jpg)');
+					fun = true;
+                }
 				if(click === 10){
 					endGame();
 				}
