@@ -29,13 +29,27 @@
 			background-size: 1525px;
 			background-repeat: repeat;
 		}
+		.text{
+			width: 100px;
+			height: 120px;
+			background-color: transparent;
+			background-size: 100px;
+			font-size: 300%;
+			text-align: center;
+			user-select: none;
+			display: block;
+			position: absolute;
+			top: 100px;
+			left: 100px; 
+		}
 	</style>
 	<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 
 </head>
 <body class="board">
 	<!-- HTML for the box -->
-	<div class="box">?</div>
+	<div class="box"></div>
+	<div class="text">?</div>
 
 	<script>
 		(function(){
@@ -48,14 +62,15 @@
 			
 			var box = jQuery('.box');	// reference to the HTML .box element
 			var board = jQuery('.board');	// reference to the HTML .board element
+			var text = jQuery('.text');
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 			var boardHeight = jQuery(window).height(); //the maximum Y-Coordinate of the screen
 
 			// Every 50 milliseconds, call the update Function (see below)
 			var interval = setInterval(update, 50);
 			
-			// Every time the box is clicked, call the handleBoxClick Function (see below)
-			box.on('click', handleBoxClick);
+			// Every time the box is clicked, call the handleTextClick Function (see below)
+			text.on('click', changeTextClick)
 			
 			// Every time the board is clicked, call the handleBoardClick Function (see below)
 			board.on('click', handleBoardClick);
@@ -64,11 +79,17 @@
 			function moveBoxTo(newPositionX,newPositionY) {
 				box.css("left", newPositionX);
 				box.css("top", newPositionY);
+				
+			}
+			//Moves the Points to a new position
+			function moveTextTo(newPositionX,newPositionY) {
+				text.css("left", newPositionX);
+				text.css("top", newPositionY);
 			}
 
 			// changes the text displayed on the Box
-			function changeBoxText(newText) {
-				box.text(newText);
+			function changeText(newText) {
+				text.text(newText);
 			}
 
 			//////////////////////////////////////////////////////////////////
@@ -107,6 +128,7 @@
 				positionX = positionX + speedX;
 				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
+				moveTextTo(positionX, positionY);
 				
 				//Colition on X
 				if (positionX > (boardWidth - 90) || positionX < 0) {
@@ -119,53 +141,56 @@
 
 				if (fun === true) {
 					if (speedX < 0){
-					box.css('transform', 'scalex(-1)')
+						box.css('transform', 'scalex(-1)')
 					} else {
 						box.css('transform', 'none')
 					}
 				}
+
+				
 			};
 			
 			function ranColors() {
                     color = "rgb(" + red + "," + green + "," + blue + ")";
                     box.css('background-color', color);
             }
+			function changeTextClick (){
+				positionX = randNumX;
+				positionY = randNumY;
+
+				//This will change the score shown
+				points = points + 1;
+				click = click - 1;
 				
+				//This will change the speed on X by adding 4
+				if (points % 3 === 0) {
+				if (speedX > 0){
+					speedX = speedX + 4;
+				}
+				if(speedX < 0){
+					speedX = speedX - 4;
+				}
+				//This will change the speed of Y by adding 4
+				if (speedY >= 0) {
+					speedY = speedY + 4;
+				} else if (speedY < 0) {
+					speedY = speedY - 4;
+				}
+				}
+				if (click <= 8) {
+                   ranColors();
+                }
+				changeText(points);
+			}
 			/* 
 			This Function will be called each time the box is clicked. Each time it is called,
 			it should increase the points total, increase the speed, and move the box to
 			the left side of the screen.
 			*/
 			function handleBoxClick() {
-					
-					positionX = randNumX;
-					positionY = randNumY;
-					
-				//This will change the score shown
-				points = points + 1;
-				click = click - 1;
-				
-				if (points % 3 === 0) {
-					//This will change the speed on X by adding 3
-					if (speedX > 0){
-						speedX = speedX + 4;
-					}
-					if(speedX < 0){
-						speedX = speedX - 4;
-					}
-
-					//This will change the speed of Y by adding 3
-					if (speedY >= 0) {
-						speedY = speedY + 4;
-					} else if (speedY < 0) {
-						speedY = speedY - 4;
-					}
-				}
-				if (click <= 8) {
-                   ranColors();
-                }
-				
-				changeBoxText(points);
+			
+			//Code that used to be here is now changed to the function changeTextClick... No comments
+			
 			};
 
 			function handleBoardClick() {
@@ -184,8 +209,7 @@
 			function endGame() {
 				clearInterval(interval);
 				if (endGame) {
-					changeBoxText("reset");
-					clearTimeout(handleBoxClick);
+					changeText("reset");
 					location.reload();
 				}
 			};
