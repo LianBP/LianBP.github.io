@@ -65,7 +65,7 @@
 			var text = jQuery('.text');
 			var boardWidth = board.width();	// the maximum X-Coordinate of the screen
 			var boardHeight = jQuery(window).height(); //the maximum Y-Coordinate of the screen
-
+			
 			// Every 50 milliseconds, call the update Function (see below)
 			var interval = setInterval(update, 50);
 			
@@ -124,7 +124,7 @@
                 green = Math.random() * 255;
                 blue = Math.random() * 255;
 				
-				/* Your Code to Increase positionX by 10 HERE */
+				/* Your Code to Increase positionX and Y by 10 HERE */
 				positionX = positionX + speedX;
 				positionY = positionY + speedY;
 				moveBoxTo(positionX, positionY);
