@@ -21,7 +21,9 @@ var background = function (window) {
         var canvasWidth = app.canvas.width;
         var canvasHeight = app.canvas.height;
         var groundY = ground.y;
-        
+        var cirSize = 2.5; // var circle size.
+        var lineSize = cirSize * 3 / 4; //var shiny size.
+
         // container which will be returned
         var background;
         
@@ -29,6 +31,12 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
+        var planet1;
+        var pool ={
+            "mars": "img/Mars.jpeg"
+        }
+        var buildings = []; 
+        
       
       
         // called at the start of game and whenever the page is resized
@@ -39,16 +47,57 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'yellow');
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'20, 7, 48');
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
             
+            var moon = draw.bitmap("img/moon.png");
+            moon.x = 1000;
+            moon.y = 80;
+            moon.scaleX = .4;
+            moon.scaleY = .4;
+            background.addChild(moon);
+            //Will eventually get bigger the more u travel.
+
+           // Making stars for the background
+            for (var stars = 0; stars<150 ;stars++){
+                var circle = draw.circle(cirSize, "white", "white", 2);
+                circle.x = canvasWidth * Math.random();
+                circle.y = groundY * Math.random();
+                background.addChild(circle);
+
+                var shinyUp = draw.line(circle.x, circle.y, circle.x, circle.y + (circle.radius * -2), "white", lineSize);
+                var shinyDown = draw.line(circle.x, circle.y, circle.x, circle.y + (circle.radius * 2), "white", lineSize);
+                var shinyLeft = draw.line(circle.x, circle.y, circle.x + (circle.radius * -2), circle.y , "white", lineSize);
+                var shinyRight = draw.line(circle.x, circle.y, circle.x + (circle.radius * 2), circle.y , "white", lineSize);
+                
+                background.addChild(shinyUp);
+                background.addChild(shinyDown);
+                background.addChild(shinyLeft);
+                background.addChild(shinyRight);
+            }
             
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            
-            
+            /*
+            for (var planets in pool) {
+                var planetHeight = 300;
+                var planet = draw.bitmap(pool.planets);
+                planet.x = 225 * i;
+                planet.y = groundY - planetHeight;
+                background.addChild(planet);
+                buildings.push(building);
+              }
+              Note for me: Check Objects and for in loops before going on
+            */
+
             // TODO 3: Part 1 - Add a tree
+            planet1 = draw.bitmap("img/PlanetSat.jpg");
+            planet1.x = canvasWidth;
+            planet1.y = groundY - 400;
+            planet1.scaleX = .2;
+            planet1.scaleY = .2;
+            background.addChild(planet1);
             
             
         } // end of render function - DO NOT DELETE
@@ -63,7 +112,11 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            
+            planet1.x = planet1.x - 1;
+
+            if (planet1.x < -220) {
+            planet1.x = canvasWidth;
+            }
             
             // TODO 4: Part 2 - Parallax
             
