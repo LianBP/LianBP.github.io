@@ -32,10 +32,12 @@ var background = function (window) {
         //////////////////////////////////////////////////////////////////
         // TODO (several):
         var planet1;
-        var pool ={
-            "mars": "img/Mars.jpeg"
+        var planet;
+        var backPlanets = [];
+        var pool = {
+            "saturno": "img/PlanetSat.jpg",
+            "mars": "img/Mars.jpg"
         }
-        var buildings = []; 
         
       
       
@@ -51,14 +53,8 @@ var background = function (window) {
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
-            
-            var moon = draw.bitmap("img/moon.png");
-            moon.x = 1000;
-            moon.y = 80;
-            moon.scaleX = .4;
-            moon.scaleY = .4;
-            background.addChild(moon);
-            //Will eventually get bigger the more u travel.
+           //Bellow the star loops so it appears in front of them. 
+           
 
            // Making stars for the background
             for (var stars = 0; stars<150 ;stars++){
@@ -77,21 +73,31 @@ var background = function (window) {
                 background.addChild(shinyLeft);
                 background.addChild(shinyRight);
             }
+            //Make the moon.
+            var moon = draw.bitmap("img/moon.png");
+            moon.x = 1000;
+            moon.y = 80;
+            moon.scaleX = .4;
+            moon.scaleY = .4;
+            background.addChild(moon);
+            //Will eventually get bigger the more u travel.
             
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            /*
-            for (var planets in pool) {
-                var planetHeight = 300;
-                var planet = draw.bitmap(pool.planets);
-                planet.x = 225 * i;
+            for (var a1 in pool) {
+                var planetHeight = Math.random() * 290;
+                var size = Math.random() / 10;
+                planet = draw.bitmap(String(pool.saturno));
+                planet.scaleX = size;
+                planet.scaleY = size;
+                planet.x = 200 * (Math.random() * 10);
                 planet.y = groundY - planetHeight;
                 background.addChild(planet);
-                buildings.push(building);
-              }
-              Note for me: Check Objects and for in loops before going on
-            */
+                backPlanets.push(planet);
+                console.log(pool.a1)
+            }
 
             // TODO 3: Part 1 - Add a tree
+            //Make saturn
             planet1 = draw.bitmap("img/PlanetSat.jpg");
             planet1.x = canvasWidth;
             planet1.y = groundY - 400;
@@ -112,15 +118,20 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            planet1.x = planet1.x - 1;
-
+            planet1.x = planet1.x - 1.4;
             if (planet1.x < -220) {
             planet1.x = canvasWidth;
             }
             
             // TODO 4: Part 2 - Parallax
+            for (var i = 0; i < backPlanets.length; i++) {
+                var planeta = backPlanets[i];
+                planeta.x -= 2;
+                if (planeta.x < 0){
+                    planeta.x = canvasWidth;
+                }
+            }
             
-
         } // end of update function - DO NOT DELETE
         
         
