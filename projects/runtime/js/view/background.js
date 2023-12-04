@@ -35,8 +35,10 @@ var background = function (window) {
         var planet;
         var backPlanets = [];
         var pool = {
-            "saturno": "img/PlanetSat.jpg",
-            "mars": "img/Mars.jpg"
+            saturno: "img/PlanetSat.jpg",
+            mars: "img/Mars.jpeg",
+            ice: "img/IcePlan.jpeg",
+            tree: "img/tree.png"
         }
         
       
@@ -49,7 +51,8 @@ var background = function (window) {
             // TODO 1:
             // this currently fills the background with an obnoxious yellow;
             // you should modify both the height and color to suit your game
-            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'20, 7, 48');
+           
+            var backgroundFill = draw.rect(canvasWidth,canvasHeight,'20, 7, 48');//20, 7, 48
             background.addChild(backgroundFill);
             
             // TODO 2: - Add a moon and starfield
@@ -60,7 +63,7 @@ var background = function (window) {
             for (var stars = 0; stars<150 ;stars++){
                 var circle = draw.circle(cirSize, "white", "white", 2);
                 circle.x = canvasWidth * Math.random();
-                circle.y = groundY * Math.random();
+                circle.y = canvasHeight * Math.random();
                 background.addChild(circle);
 
                 var shinyUp = draw.line(circle.x, circle.y, circle.x, circle.y + (circle.radius * -2), "white", lineSize);
@@ -83,10 +86,10 @@ var background = function (window) {
             //Will eventually get bigger the more u travel.
             
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
-            for (var a1 in pool) {
+            for (var xx2 in pool) {
                 var planetHeight = Math.random() * 290;
-                var size = Math.random() / 10;
-                planet = draw.bitmap(String(pool.saturno));
+                var size = Math.random() / 2;
+                planet = draw.bitmap(pool[String(xx2)]);
                 planet.scaleX = size;
                 planet.scaleY = size;
                 planet.x = 200 * (Math.random() * 10);
