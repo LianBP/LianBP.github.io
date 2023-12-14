@@ -69,37 +69,60 @@ var runLevels = function (window) {
         reward.flyTo(reward.x, 0);
       }
     }
-    function createMarker(){
-      var marker = game.createGameItem("marker", 25);
+    function createMarker(x, y){
+      var marker = game.createGameItem("marker", 75);
       var blueSquare = draw.rect(50, 50, "blue");
       blueSquare.x = -25;
       blueSquare.y = -25;
       marker.x = x;
       marker.y = y;
       game.addGameItem(marker);
-      marker.addChild(greenSquare);
-    
+      marker.addChild(blueSquare);
+      marker.velocityX = -4;
+      marker.onPlayerCollision = function(){
+        game.changeIntegrity(200);
+        startLevel()
+      }
+      marker.onProjectileCollision = function(){
+        startLevel()
+      }
     }
     
     //Make Marker
-      //createMarker(200, groundY - 50);
+      //createMarker(1000, groundY - 50);
 
     //Make rewards
-    createReward(2000, groundY - 50);
+      //createReward(900, groundY - 50);
 
     //Make objects
-    createSawObject(1000, 460);
-    createSawObject(700, 360);
-    createSawObject(1300, 400);
+      //createSawObject(700, groundY - 50);
 
     //Make enemys
-    createEnemy(900, groundY - 50);
-    createEnemy(1200, groundY - 50);
+      //createEnemy(900, groundY - 50);
+
 
     function startLevel() {
       // TODO 13 goes below here
+        var level = levelData[currentLevel];
+        var levelObjects = level.gameItems; 
+        
+        
+        for(i = 0; i < levelObjects.length; i++){
+          
+          levelObjects = level.gameItems[i]
+          var objectX = levelObjects.x;
+          var objectY = levelObjects.y;
 
-
+          if (levelObjects.type === "object"){
+            createSawObject(objectX, objectY);
+          } else if (levelObjects.type === "enemy"){
+            createEnemy(objectX, objectY);
+          }else if (levelObjects.type === "reward"){
+            createReward(objectX, objectY);
+          }else if (levelObjects.type === "marker"){
+            createMarker(objectX, objectY);
+          }
+        }
 
       //////////////////////////////////////////////
       // DO NOT EDIT CODE BELOW HERE

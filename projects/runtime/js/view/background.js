@@ -31,14 +31,14 @@ var background = function (window) {
         // ANIMATION VARIABLES HERE //////////////////////////////////////
         //////////////////////////////////////////////////////////////////
         // TODO (several):
-        var planet1;
+        var ufo;
         var planet;
         var backPlanets = [];
         var pool = {
-            saturno: "img/PlanetSat.jpg",
-            mars: "img/Mars.jpeg",
-            ice: "img/IcePlan.jpeg",
-            tree: "img/tree.png"
+            mars: "img/Mars.png",
+            venus: "img/Venus.png",
+            saturno: "img/Saturno.png",
+            
         }
         
       
@@ -85,10 +85,13 @@ var background = function (window) {
             background.addChild(moon);
             //Will eventually get bigger the more u travel.
             
+             // TODO 3: Part 1 - Add a tree
+
+
             // TODO 4: Part 1 - Add buildings!     Q: This is before TODO 4 for a reason! Why?
             for (var xx2 in pool) {
-                var planetHeight = Math.random() * 290;
-                var size = Math.random() / 2;
+                var planetHeight = groundY - (Math.random() * 290);
+                var size = Math.random() / 2; 
                 planet = draw.bitmap(pool[String(xx2)]);
                 planet.scaleX = size;
                 planet.scaleY = size;
@@ -96,17 +99,16 @@ var background = function (window) {
                 planet.y = groundY - planetHeight;
                 background.addChild(planet);
                 backPlanets.push(planet);
-                console.log(pool.a1)
+                
             }
-
-            // TODO 3: Part 1 - Add a tree
-            //Make saturn
-            planet1 = draw.bitmap("img/PlanetSat.jpg");
-            planet1.x = canvasWidth;
-            planet1.y = groundY - 400;
-            planet1.scaleX = .2;
-            planet1.scaleY = .2;
-            background.addChild(planet1);
+            //Make UFO
+            ufo = draw.bitmap("img/UFO.png");
+            ufo.x = canvasWidth;
+            ufo.y = Math.random() * 750 - groundY;
+            ufo.scaleX = .05;
+            ufo.scaleY = .05;
+            background.addChild(ufo);
+           
             
             
         } // end of render function - DO NOT DELETE
@@ -121,16 +123,16 @@ var background = function (window) {
             var groundY = ground.y;
             
             // TODO 3: Part 2 - Move the tree!
-            planet1.x = planet1.x - 1.4;
-            if (planet1.x < -220) {
-            planet1.x = canvasWidth;
+            ufo.x = ufo.x - 1.5;
+            if (ufo.x < -220) {
+            ufo.x = canvasWidth;
             }
             
             // TODO 4: Part 2 - Parallax
             for (var i = 0; i < backPlanets.length; i++) {
                 var planeta = backPlanets[i];
-                planeta.x -= 2;
-                if (planeta.x < 0){
+                planeta.x -= 0.3;
+                if (planeta.x < -400){
                     planeta.x = canvasWidth;
                 }
             }

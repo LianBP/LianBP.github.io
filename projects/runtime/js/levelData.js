@@ -15,9 +15,13 @@ var makeLevelData = function (window) {
         number: 1,
         speed: -3,
         gameItems: [
-          { type: "sawblade", x: 400, y: groundY },
-          { type: "sawblade", x: 600, y: groundY },
-          { type: "sawblade", x: 900, y: groundY },
+          { type: "object", x: 400, y: groundY},
+          { type: "object", x: 600, y: groundY},
+          { type: "enemy", x: 750, y:groundY - 50},
+          { type: "object", x: 900, y: groundY},
+          { type: "reward", x:1000, y:goundY - 120},
+          { type: "enemy", x: 1150, y:groundY - 50},
+          { type: "marker", x: 1400, y:groundY - 50}
         ],
       },
       {
@@ -26,8 +30,26 @@ var makeLevelData = function (window) {
         speed: -3,
         gameItems: [
           { type: "sawblade", x: 400, y: groundY },
+          {type: "enemy", x: 500, y: goundY - 50},
           { type: "sawblade", x: 600, y: groundY },
+          { type: "reward", x: 790, y: goundY - 50},
           { type: "sawblade", x: 900, y: groundY },
+          { type: "marker", x: 1080, y: goundY - 50}
+        ],
+      },
+      {
+        name: "JUMP",
+        number: 3,
+        speed: -4,
+        gameItems: [
+          { type: "sawblade", x: 400, y: groundY},
+          {type: "enemy", x: 500, y: goundY - 50},
+          { type: "sawblade", x: 600, y: groundY},
+          { type: "enemy", x: 790, y: goundY - 50},
+          { type: "sawblade", x: 900, y: groundY},
+          {type: "enemy", x: 980, y:goundY - 50},
+          { type: "reward", x: 1200, y:groundY - 100},
+          { type: "marker", x: 1300, y: goundY - 50},
         ],
       },
     ];
