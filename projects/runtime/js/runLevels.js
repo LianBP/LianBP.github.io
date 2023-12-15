@@ -98,7 +98,7 @@ var runLevels = function (window) {
       //createSawObject(700, groundY - 50);
 
     //Make enemys
-      //createEnemy(900, groundY - 50);
+      createEnemy(900, groundY - 50);
 
 
     function startLevel() {
@@ -109,17 +109,17 @@ var runLevels = function (window) {
         
         for(i = 0; i < levelObjects.length; i++){
           
-          levelObjects = level.gameItems[i]
-          var objectX = levelObjects.x;
-          var objectY = levelObjects.y;
-
-          if (levelObjects.type === "object"){
+          var lvlObjects = level.gameItems[i]
+          var objectX = lvlObjects.x;
+          var objectY = lvlObjects.y;
+          
+          if (lvlObjects.type === "object"){
             createSawObject(objectX, objectY);
-          } else if (levelObjects.type === "enemy"){
+          }else if (lvlObjects.type === "enemy"){
             createEnemy(objectX, objectY);
-          }else if (levelObjects.type === "reward"){
+          }else if (lvlObjects.type === "reward"){
             createReward(objectX, objectY);
-          }else if (levelObjects.type === "marker"){
+          }else if (lvlObjects.type === "marker"){
             createMarker(objectX, objectY);
           }
         }

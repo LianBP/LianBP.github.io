@@ -37,8 +37,7 @@ var background = function (window) {
         var pool = {
             mars: "img/Mars.png",
             venus: "img/Venus.png",
-            saturno: "img/Saturno.png",
-            
+            saturno: "img/Saturno.png",   
         }
         
       
@@ -104,7 +103,7 @@ var background = function (window) {
             //Make UFO
             ufo = draw.bitmap("img/UFO.png");
             ufo.x = canvasWidth;
-            ufo.y = Math.random() * 750 - groundY;
+            ufo.y = Math.random() * (500 - 50) + 50;
             ufo.scaleX = .05;
             ufo.scaleY = .05;
             background.addChild(ufo);
@@ -127,7 +126,6 @@ var background = function (window) {
             if (ufo.x < -220) {
             ufo.x = canvasWidth;
             }
-            
             // TODO 4: Part 2 - Parallax
             for (var i = 0; i < backPlanets.length; i++) {
                 var planeta = backPlanets[i];
@@ -136,7 +134,6 @@ var background = function (window) {
                     planeta.x = canvasWidth;
                 }
             }
-            
         } // end of update function - DO NOT DELETE
         
         
