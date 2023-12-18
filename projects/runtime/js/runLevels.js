@@ -81,9 +81,11 @@ var runLevels = function (window) {
       marker.onPlayerCollision = function(){
         game.changeIntegrity(200);
         startLevel();
+        marker.shrink();
       }
       marker.onProjectileCollision = function(){
         startLevel();
+        marker.shrink();
       }
     }
     
